@@ -1,7 +1,5 @@
 <template>
-  <div id="app">
-    <MainComponent />
-  </div>
+  <MainComponent />
 </template>
 
 <script lang="ts">
@@ -18,16 +16,25 @@ export default defineComponent({
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  font-family: "Inter", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #000000;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
 }
 </style>

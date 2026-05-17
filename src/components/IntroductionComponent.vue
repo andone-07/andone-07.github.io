@@ -1,74 +1,76 @@
 <template>
-  <div class="intro">
-    <span class="cn"
-      >Welcome to visit my homepage! Currently, I am a master's student majoring
-      in artificial intelligence at
-      <a
-        href="https://zjuidg.org/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="highlight-blue link-text"
-        >ZJUIDG</a
-      >
-      of
-      <a class="highlight-black">Zhejiang University</a>, supervised by
-      <a
-        href="https://dwe.ng/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="highlight-blue link-text"
-        >Prof.Di Weng</a
-      >. I obtained my bachelor's degree in Computer Science and Technology from
-      <a class="highlight-black">Ocean University of China</a>
-      in 2024. My research aims to
-      <span class="highlight-orange">visualization and visual analytics</span
-      >.</span
+  <p class="intro">
+    {{ introduction.textBeforeGroup }}
+    <a
+      :href="introduction.group.href"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="highlight-blue link-text"
+      >{{ introduction.group.label }}</a
     >
-  </div>
+    of <strong>{{ introduction.university }}</strong
+    >, supervised by
+    <a
+      :href="introduction.supervisor.href"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="highlight-blue link-text"
+      >{{ introduction.supervisor.label }}</a
+    >. I obtained my bachelor's degree in Computer Science and Technology from
+    <strong>{{ introduction.bachelorSchool }}</strong> in 2024. My research
+    focuses on
+    <span class="highlight-orange">{{ introduction.researchGoal }}</span
+    >.
+  </p>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { introduction } from "@/data/profile";
+
 export default defineComponent({
   name: "IntroductionComponent",
+  setup() {
+    return {
+      introduction,
+    };
+  },
 });
 </script>
 
 <style scoped>
 .intro {
-  width: 71%;
-  margin: 0 auto; /* 保持水平居中 */
-  text-align: left; /* 可选：如果想让内容也居中 */
+  width: min(100%, 1080px);
+  margin: 0 auto;
+  text-align: left;
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-size: clamp(1rem, 1.8vh, 1.15rem);
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--text-primary);
 }
 
-.cn {
-  font-family: "NotoSerifSC";
-  font-size: 1.8vh; /* 缩小到英文字体的85% */
-  font-weight: 400; /* regular字重 */
-  line-height: 1.8; /* 添加行高，设置为字体大小的1.8倍 */
-}
-
-.highlight-blue {
-  color: #2171b5;
+strong {
+  color: var(--text-primary);
   font-weight: 800;
 }
 
-.highlight-black {
-  color: #000000;
+.highlight-blue {
+  color: var(--highlight-blue);
   font-weight: 800;
 }
 
 .highlight-orange {
-  color: #f16913;
+  color: var(--highlight-orange);
   font-weight: 800;
 }
 
 .link-text {
   text-decoration: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 
 .link-text:hover {
-  opacity: 0.8;
+  opacity: 0.78;
 }
 </style>

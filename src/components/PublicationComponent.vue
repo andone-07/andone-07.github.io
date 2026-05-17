@@ -1,116 +1,151 @@
 <template>
-  <div class="publication-container">
-    <div class="publication-title">Publications</div>
+  <section class="publication-container" aria-labelledby="publication-title">
+    <h2 id="publication-title" class="section-title">Publications</h2>
     <div class="publication-content">
-      <div class="publication-item">
-        <div class="publication-image">
-          <img src="/watchtower.png" alt="Publication thumbnail" />
-        </div>
+      <article
+        v-for="publication in publications"
+        :key="publication.title"
+        class="publication-item"
+      >
+        <figure class="publication-image">
+          <img
+            :src="publication.image"
+            :alt="`${publication.title} thumbnail`"
+          />
+        </figure>
         <div class="publication-info">
-          <div class="pub-title">
-            Watchtower: Semantic-aware Authoring of Data Validation Rules
-          </div>
-          <div class="pub-authors">
-            Zhongsu Luo, <span class="author-myself">Jiawen Zhu</span>, Xinhuan
-            Shu, Shuhan Liu, Xiwen Cai, Ran Chen, Kai Xiong, Jiajun Zhu, Di
-            Weng, Yingcai Wu
-          </div>
-          <div class="pub-venue">
-            <span class="venue-tag">VIS'25</span>
+          <h3 class="pub-title">{{ publication.title }}</h3>
+          <p class="pub-authors">
+            <template
+              v-for="(author, index) in publication.authors"
+              :key="author"
+            >
+              <span
+                :class="{ 'author-myself': isHighlighted(publication, author) }"
+              >
+                {{ author }}</span
+              ><span v-if="index < publication.authors.length - 1">, </span>
+            </template>
+          </p>
+          <p class="pub-venue">
+            <span class="venue-tag">{{ publication.venueTag }}</span>
             <span class="venue-detail">
-              IEEE Transactions on Visualization and Computer Graphics, 2025
+              {{ publication.venue }}, {{ publication.year }}
             </span>
-          </div>
-          <div class="pub-links">
-            <a href="#" class="link-item"
-              >[ <img src="../assets/icons/pdf.svg" class="link-icon" /> Paper
-              ]</a
+          </p>
+          <div class="pub-links" aria-label="Publication resources">
+            <component
+              :is="link.href ? 'a' : 'span'"
+              v-for="link in publication.links"
+              :key="link.label"
+              :href="link.href"
+              :target="link.href ? '_blank' : undefined"
+              :rel="link.href ? 'noopener noreferrer' : undefined"
+              :class="['link-item', { disabled: !link.href }]"
+              :aria-disabled="!link.href"
             >
-            <a href="#" class="link-item"
-              >[ <img src="../assets/icons/video.svg" class="link-icon" /> Video
-              ]</a
-            >
-            <a href="#" class="link-item"
-              >[ <img src="../assets/icons/web.svg" class="link-icon" /> Web
-              ]</a
-            >
-            <a href="#" class="link-item"
-              >[ <img src="../assets/icons/github.svg" class="link-icon" /> Code
-              ]</a
-            >
+              [
+              <img
+                :src="link.icon"
+                class="link-icon"
+                alt=""
+                aria-hidden="true"
+              />
+              {{ link.label }} ]
+            </component>
           </div>
         </div>
-      </div>
+      </article>
     </div>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { publications, type Publication } from "@/data/profile";
+
+const isHighlighted = (publication: Publication, author: string) =>
+  publication.highlightedAuthors.includes(author);
+
 export default defineComponent({
   name: "PublicationComponent",
+  setup() {
+    return {
+      isHighlighted,
+      publications,
+    };
+  },
 });
 </script>
 
 <style scoped>
 .publication-container {
-  width: 71%;
+  width: min(100%, 1080px);
   margin: 0 auto;
   text-align: left;
-  padding-top: 2vh;
+  padding-top: clamp(1.2rem, 2vh, 1.8rem);
 }
 
-.publication-title {
+.section-title {
   font-family: "Abhaya Libre SemiBold";
-  font-size: 3vh;
+  font-size: clamp(1.6rem, 3vh, 2rem);
   font-weight: 550;
-  margin-bottom: 2vh;
+  margin: 0 0 1.2rem;
+  color: var(--text-primary);
 }
 
 .publication-content {
   display: flex;
   flex-direction: column;
-  gap: 2vh;
+  gap: 1.5rem;
 }
 
 .publication-item {
-  display: flex;
-  gap: 1vw;
-  padding: 1vh 0;
+  display: grid;
+  grid-template-columns: minmax(16rem, 23rem) 1fr;
+  gap: clamp(1rem, 2vw, 1.6rem);
+  padding: 0.4rem 0 1rem;
 }
 
 .publication-image {
-  width: 37.22vh;
-  height: 20.92vh;
-  background-color: #f5f5f5;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 0;
+  background-color: var(--surface-muted);
   overflow: hidden;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
 }
 
 .publication-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  display: block;
 }
 
 .publication-info {
-  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 1vh;
+  gap: 0.75rem;
 }
 
 .pub-title {
-  font-family: "NotoSerifSC";
-  font-size: 2.1vh;
+  margin: 0;
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-size: clamp(1.12rem, 2.1vh, 1.35rem);
   font-weight: 800;
-  color: #f16913;
-  padding-bottom: 0.5vh;
+  color: var(--text-primary);
+  line-height: 1.35;
 }
 
 .pub-authors {
+  margin: 0;
   font-family: "Abhaya Libre Regular";
-  font-size: 2.1vh;
-  color: #000000;
+  font-size: clamp(1rem, 2vh, 1.22rem);
+  color: var(--text-primary);
+  line-height: 1.5;
 }
 
 .author-myself {
@@ -119,49 +154,62 @@ export default defineComponent({
 }
 
 .pub-venue {
+  margin: 0;
   font-family: "Roboto";
-  font-size: 1.8vh;
-  color: #666666;
+  font-size: clamp(0.95rem, 1.8vh, 1.1rem);
+  color: var(--text-secondary);
   display: flex;
   align-items: center;
-  gap: 0.5vw;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .venue-tag {
-  border: 2px solid #d9d9d9;
-  padding: 0.3vh 0.8vh;
-  border-radius: 0.46vh;
+  border: 1px solid var(--border-color);
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
   font-family: "Roboto";
-  font-size: 1.8vh;
-  color: #000000;
+  color: var(--text-primary);
 }
 
 .venue-detail {
   font-family: "Roboto";
-  color: #000000;
+  color: var(--text-primary);
   font-style: italic;
 }
 
 .pub-links {
   display: flex;
-  gap: 1.5vw;
-  margin-top: 0.5vh;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 0.1rem;
 }
 
 .link-item {
   font-family: "Roboto";
-  font-size: 1.8vh;
-  color: #000000;
+  font-size: clamp(0.95rem, 1.8vh, 1.1rem);
+  color: var(--text-primary);
   text-decoration: none;
 }
 
-.link-item:hover {
+.link-item:not(.disabled):hover {
   text-decoration: underline;
 }
 
+.link-item.disabled {
+  cursor: not-allowed;
+  color: var(--text-muted);
+}
+
 .link-icon {
-  width: 2vh;
-  height: 2vh;
-  vertical-align: -0.4vh;
+  width: 1.1rem;
+  height: 1.1rem;
+  vertical-align: -0.2rem;
+}
+
+@media (max-width: 760px) {
+  .publication-item {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

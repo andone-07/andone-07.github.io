@@ -22,13 +22,6 @@
 }
 
 @font-face {
-  font-family: 'NotoSerifSC';
-  font-style: normal;
-  font-display: swap;
-  src: url(./NotoSerifSC-VariableFont_wght.ttf) format("truetype");
-}
-
-@font-face {
   font-family: 'Abhaya Libre Regular';
   font-style: normal;
   font-display: swap;

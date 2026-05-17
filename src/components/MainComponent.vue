@@ -3,55 +3,53 @@
     <div class="head">
       <PageHead />
     </div>
-    <div class="content">
-      <div id="about" class="about">
+    <main class="content">
+      <section id="about" class="section about">
         <AboutComponent />
-      </div>
-      <div class="introduction">
+      </section>
+      <section class="section introduction">
         <IntroductionComponent />
-      </div>
-      <div id="news" class="news">
+      </section>
+      <section id="news" class="section section-tinted news">
         <NewsComponent />
-      </div>
-      <div id="publication" class="publication">
+      </section>
+      <section id="publication" class="section section-tinted publication">
         <PublicationComponent />
-      </div>
-    </div>
+      </section>
+    </main>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import PageHead from "./PageHead.vue";
 import AboutComponent from "./AboutComponent.vue";
 import IntroductionComponent from "./IntroductionComponent.vue";
 import NewsComponent from "./NewsComponent.vue";
+import PageHead from "./PageHead.vue";
 import PublicationComponent from "./PublicationComponent.vue";
+
 export default defineComponent({
   name: "MainComponent",
   components: {
-    PageHead,
     AboutComponent,
     IntroductionComponent,
     NewsComponent,
+    PageHead,
     PublicationComponent,
   },
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .main-component {
   width: 100%;
   min-height: 100vh;
   background-color: var(--bg-primary);
-  display: flex;
-  flex-direction: column;
-  scroll-behavior: smooth;
+  color: var(--text-primary);
 }
 
 .head {
-  height: 6.1vh;
+  height: var(--header-height);
   display: flex;
   align-items: center;
   border-bottom: 1px solid var(--border-color);
@@ -66,39 +64,34 @@ export default defineComponent({
 .content {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  padding-top: var(--header-height);
+}
+
+.section {
+  width: 100%;
+  display: flex;
   justify-content: center;
-  padding-top: 6.1vh;
+  padding: clamp(1.3rem, 3vh, 2.2rem) clamp(1rem, 4vw, 2rem);
+  box-sizing: border-box;
+  scroll-margin-top: calc(var(--header-height) + 1rem);
 }
 
 .about {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2vh 0;
-  margin-top: 1vh;
+  padding-top: clamp(1.4rem, 3vh, 2.5rem);
+  padding-bottom: clamp(0.9rem, 2vh, 1.5rem);
 }
 
 .introduction {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 2vh;
-  border-bottom: 1px solid #d9d9d9;
+  padding-top: 0;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.news {
-  width: 100%;
-  background-color: #f7fbff;
-  padding-bottom: 3vh;
-  border-bottom: 1px solid #d9d9d9;
+.section-tinted {
+  background-color: var(--section-bg);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .publication {
-  width: 100%;
-  height: 60vh;
-  background-color: #f7fbff;
+  min-height: 46vh;
 }
 </style>

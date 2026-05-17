@@ -1,37 +1,42 @@
-# 此工作流已禁用
 name: Build and Deploy
 
 on:
-  # 注释掉触发条件，防止自动运行
-  # push:
-  #   branches:
-  #     - master
-  workflow_dispatch:  # 只有手动触发时才会运行
+  push:
+    branches:
+      - master
+  workflow_dispatch:
 
-# 新增权限设置
 permissions:
   contents: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 22
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Lint
+        run: npm run lint
 
       - name: Build
         run: npm run build
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.5
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: dist

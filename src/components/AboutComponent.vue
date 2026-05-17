@@ -1,110 +1,94 @@
 <template>
-  <div class="about-container">
-    <div class="profile-section">
-      <div class="avatar">
-        <img src="../assets/photo.jpg" alt="Jiawen Zhu" />
+  <article class="about-card">
+    <div class="avatar">
+      <img src="@/assets/photo.jpg" :alt="profile.avatarAlt" />
+    </div>
+    <div class="info">
+      <div class="intro">
+        <span class="en">Hello!&nbsp;&nbsp;I'm {{ profile.name }}</span>
+        <span class="cn">({{ profile.chineseName }})</span>
+        <img :src="profile.logo" alt="Zhejiang University" class="logo" />
       </div>
-      <div class="info">
-        <div class="intro">
-          <span class="en">Hello!&nbsp;&nbsp;I'm Jiawen Zhu</span>
-          <span class="cn">（朱甲文）</span>
-          <img src="../assets/icons/zjulogo.svg" alt="ZJU Logo" class="logo" />
-        </div>
-        <div class="identity">
-          <span class="cn"
-            >Master's student in Artificial Intelligence @ Zhejiang
-            University</span
-          >
-        </div>
-        <div class="direction">
-          <span class="cn">Data Visualization </span>
+      <p class="identity">{{ profile.affiliation }}</p>
+      <div class="direction" aria-label="Research interests">
+        <template
+          v-for="(area, index) in profile.researchAreas"
+          :key="area.label"
+        >
+          <span>{{ area.label }}</span>
           <img
-            src="../assets/icons/visualization.svg"
-            alt="Visualization Icon"
-            class="icon"
+            :src="area.icon"
+            :alt="`${area.label} icon`"
+            :class="[
+              'icon',
+              { 'time-icon': area.label === 'Time Series Forecasting' },
+            ]"
           />
-          <span class="cn"> | </span>
-          <span class="cn"> Human-Computer Interaction </span>
-          <img src="../assets/icons/hci.svg" alt="HCI Icon" class="icon" />
-        </div>
-        <div class="connect">
-          <a href="mailto:jiawenzhu@zju.edu.cn" class="connect-link">
-            <img
-              src="../assets/icons/email.svg"
-              alt="Email Icon"
-              class="connect-icon"
-            />
-          </a>
-          <a
-            href="https://github.com/andone-07"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="connect-link"
-          >
-            <img
-              src="../assets/icons/github.svg"
-              alt="Github Icon"
-              class="connect-icon"
-            />
-          </a>
+          <span v-if="index < profile.researchAreas.length - 1" class="divider">
+            |
+          </span>
+        </template>
+      </div>
+      <div class="connect" aria-label="Contact and social links">
+        <component
+          :is="link.href ? 'a' : 'span'"
+          v-for="link in profile.links"
+          :key="link.label"
+          :href="link.href"
+          :target="link.href?.startsWith('http') ? '_blank' : undefined"
+          :rel="
+            link.href?.startsWith('http') ? 'noopener noreferrer' : undefined
+          "
+          :class="['connect-link', { disabled: !link.href }]"
+          :aria-label="link.label"
+          :aria-disabled="!link.href"
+        >
           <img
-            src="../assets/icons/google.svg"
-            alt="Google Icon"
+            :src="link.icon"
+            :alt="`${link.label} icon`"
             class="connect-icon"
           />
-          <img
-            src="../assets/icons/TwitterX.svg"
-            alt="TwitterX Icon"
-            class="connect-icon"
-          />
-          <a
-            href="https://space.bilibili.com/503410002"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="connect-link"
-          >
-            <img
-              src="../assets/icons/bilibili.svg"
-              alt="Bilibili Icon"
-              class="connect-icon"
-            />
-          </a>
-        </div>
+        </component>
       </div>
     </div>
-  </div>
+  </article>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { profile } from "@/data/profile";
+
 export default defineComponent({
   name: "AboutComponent",
+  setup() {
+    return {
+      profile,
+    };
+  },
 });
 </script>
 
 <style scoped>
-.about-container {
-  width: 70%;
-  margin: 0 auto; /* 保持水平居中 */
-  background-color: #deebf7;
-  border: 1px solid #d9d9d9;
-  border-radius: 0.92vh;
-  padding: 1.5vh; /* 可选：添加内边距 */
-  text-align: center; /* 可选：如果想让内容也居中 */
-}
-
-.profile-section {
+.about-card {
+  width: min(100%, 1080px);
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: clamp(1.2rem, 3vw, 2rem);
+  margin: 0 auto;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: clamp(1rem, 2.4vh, 1.6rem);
   text-align: left;
+  box-sizing: border-box;
 }
 
 .avatar {
-  width: 15vh;
-  height: 15vh;
+  width: clamp(7.5rem, 15vh, 9.5rem);
+  height: clamp(7.5rem, 15vh, 9.5rem);
   border-radius: 50%;
   overflow: hidden;
+  flex: 0 0 auto;
 }
 
 .avatar img {
@@ -113,53 +97,77 @@ export default defineComponent({
   object-fit: cover;
 }
 
-.intro {
-  font-size: 2.8vh;
-  margin-bottom: 1vh;
-  /* 设置多字体栈，英文使用Yaldevi，中文使用Noto Sans SC */
-  font-family: "Yaldevi", "NotoSerifSC";
+.info {
+  min-width: 0;
 }
 
-/* 修改英文样式为semibold */
+.intro {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 0.65rem;
+  font-family: "Yaldevi", "Noto Serif SC", "Songti SC", serif;
+  font-size: clamp(1.35rem, 2.8vh, 1.8rem);
+}
+
 .en {
   font-family: "Yaldevi";
-  font-weight: 550; /* semibold字重 */
+  font-weight: 550;
+  color: var(--text-primary);
 }
 
-/* 修改中文样式为更小字体且regular */
-.cn {
-  font-family: "NotoSerifSC";
-  font-size: 2.1vh; /* 缩小到英文字体的85% */
-  font-weight: 400; /* regular字重 */
+.cn,
+.identity,
+.direction {
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-size: clamp(1rem, 2vh, 1.22rem);
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.identity {
+  margin: 0 0 0.45rem;
 }
 
 .direction {
-  padding-top: 0.3vh;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.divider {
+  color: var(--text-secondary);
+  padding: 0 0.15rem;
 }
 
 .icon {
-  width: 2.1vh; /* 调整图标大小 */
-  height: 2.1vh;
+  width: 1.25rem;
+  height: 1.25rem;
   vertical-align: middle;
-  padding-bottom: 0.3vh;
+}
+
+.time-icon {
+  transform: translate(0.15rem, 0.15rem);
 }
 
 .connect-icon {
-  width: 2.5vh; /* 调整图标大小 */
-  height: 2.5vh;
+  width: 1.55rem;
+  height: 1.55rem;
   vertical-align: middle;
 }
 
 .connect {
-  padding-top: 0.6vh;
-  display: flex; /* 使用flex布局 */
-  align-items: center; /* 垂直居中对齐 */
-  gap: 0.6vh; /* 设置图标之间的间距 */
+  padding-top: 0.65rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
 }
 
 .logo {
-  margin-left: 0.5vw;
-  height: 2.5vh;
+  margin-left: 0.15rem;
+  height: 1.55rem;
   vertical-align: middle;
 }
 
@@ -167,10 +175,33 @@ export default defineComponent({
   display: flex;
   align-items: center;
   text-decoration: none;
+  border-radius: 6px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .connect-link:hover {
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
+  opacity: 0.78;
+  transform: translateY(-1px);
+}
+
+.connect-link.disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+.connect-link.disabled:hover {
+  transform: none;
+}
+
+@media (max-width: 700px) {
+  .about-card {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .about-card {
+    flex-direction: column;
+  }
 }
 </style>

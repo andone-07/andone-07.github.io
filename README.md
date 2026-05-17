@@ -1,24 +1,25 @@
-# homepage
+# Jiawen Zhu Homepage
 
-## Project setup
-```
+Personal academic homepage built with Vue 3, TypeScript, and Vite.
+
+## Development
+
+```bash
 npm install
+npm run dev
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Quality Checks
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
+```bash
 npm run lint
+npm run build
+npm audit
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Content
+
+Most editable homepage content lives in `src/data/profile.ts`. Update that file
+when adding news, publications, research areas, or social links.
+
+Static files copied as-is by Vite live in `public/`.
