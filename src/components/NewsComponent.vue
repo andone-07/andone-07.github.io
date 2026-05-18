@@ -67,9 +67,9 @@ export default defineComponent({
 }
 
 .section-title {
-  font-family: "Abhaya Libre SemiBold";
+  font-family: "Abhaya Libre", Georgia, serif;
   font-size: clamp(1.6rem, 3vh, 2rem);
-  font-weight: 550;
+  font-weight: 600;
   margin: 0 0 1.2rem;
   color: var(--text-primary);
 }
@@ -88,16 +88,16 @@ export default defineComponent({
 }
 
 .news-item-time {
-  font-family: "Abhaya Libre SemiBold";
+  font-family: "Abhaya Libre", Georgia, serif;
   font-size: clamp(1rem, 2vh, 1.22rem);
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-primary);
   white-space: nowrap;
 }
 
 .news-item-content {
   margin: 0;
-  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
   font-size: clamp(1rem, 1.8vh, 1.15rem);
   color: var(--text-primary);
   line-height: 1.6;

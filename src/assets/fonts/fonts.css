@@ -1,43 +1,47 @@
 @font-face {
   font-family: 'Inter';
   font-style: normal;
+  font-weight: 100 900;
   font-display: swap;
-  src: url(./Inter-VariableFont_opsz,wght.ttf) format("truetype");
+  src: url(./Inter-VariableFont_opsz,wght.woff2) format("woff2");
 }
 
 @font-face {
   font-family: 'Carattere';
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   font-display: swap;
-  src: url(./Carattere-Regular.ttf) format("truetype");
+  src: url(./Carattere-Regular.woff2) format("woff2");
 }
 
 @font-face {
   font-family: 'Yaldevi';
   font-style: normal;
-  font-weight: 500;
+  font-weight: 200 700;
   font-display: swap;
-  src: url(./Yaldevi-VariableFont_wght.ttf) format("truetype");
+  src: url(./Yaldevi-VariableFont_wght.woff2) format("woff2");
 }
 
 @font-face {
-  font-family: 'Abhaya Libre Regular';
+  font-family: 'Abhaya Libre';
   font-style: normal;
+  font-weight: 400;
   font-display: swap;
-  src: url(./AbhayaLibre-Regular.ttf) format("truetype");
+  src: url(./AbhayaLibre-Regular.woff2) format("woff2");
 }
 
 @font-face {
-  font-family: 'Abhaya Libre SemiBold';
+  font-family: 'Abhaya Libre';
   font-style: normal;
+  font-weight: 600;
   font-display: swap;
-  src: url(./AbhayaLibre-SemiBold.ttf) format("truetype");
+  src: url(./AbhayaLibre-SemiBold.woff2) format("woff2");
 }
 
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
+  font-weight: 100 900;
   font-display: swap;
-  src: url(./Roboto-VariableFont_wdth\,wght.ttf) format("truetype");
+  src: url(./Roboto-VariableFont_wdth\,wght.woff2) format("woff2");
 }

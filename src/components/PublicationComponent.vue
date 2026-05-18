@@ -11,6 +11,11 @@
           <img
             :src="publication.image"
             :alt="`${publication.title} thumbnail`"
+            width="1600"
+            height="724"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
           />
         </figure>
         <div class="publication-info">
@@ -87,9 +92,9 @@ export default defineComponent({
 }
 
 .section-title {
-  font-family: "Abhaya Libre SemiBold";
+  font-family: "Abhaya Libre", Georgia, serif;
   font-size: clamp(1.6rem, 3vh, 2rem);
-  font-weight: 550;
+  font-weight: 600;
   margin: 0 0 1.2rem;
   color: var(--text-primary);
 }
@@ -133,7 +138,7 @@ export default defineComponent({
 
 .pub-title {
   margin: 0;
-  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
   font-size: clamp(1.12rem, 2.1vh, 1.35rem);
   font-weight: 800;
   color: var(--text-primary);
@@ -142,20 +147,21 @@ export default defineComponent({
 
 .pub-authors {
   margin: 0;
-  font-family: "Abhaya Libre Regular";
+  font-family: "Abhaya Libre", Georgia, serif;
   font-size: clamp(1rem, 2vh, 1.22rem);
   color: var(--text-primary);
   line-height: 1.5;
 }
 
 .author-myself {
-  font-family: "Abhaya Libre SemiBold";
+  font-family: "Abhaya Libre", Georgia, serif;
+  font-weight: 600;
   text-decoration: underline;
 }
 
 .pub-venue {
   margin: 0;
-  font-family: "Roboto";
+  font-family: "Roboto", "Inter", sans-serif;
   font-size: clamp(0.95rem, 1.8vh, 1.1rem);
   color: var(--text-secondary);
   display: flex;
@@ -168,12 +174,12 @@ export default defineComponent({
   border: 1px solid var(--border-color);
   padding: 0.2rem 0.5rem;
   border-radius: 5px;
-  font-family: "Roboto";
+  font-family: "Roboto", "Inter", sans-serif;
   color: var(--text-primary);
 }
 
 .venue-detail {
-  font-family: "Roboto";
+  font-family: "Roboto", "Inter", sans-serif;
   color: var(--text-primary);
   font-style: italic;
 }
@@ -186,7 +192,7 @@ export default defineComponent({
 }
 
 .link-item {
-  font-family: "Roboto";
+  font-family: "Roboto", "Inter", sans-serif;
   font-size: clamp(0.95rem, 1.8vh, 1.1rem);
   color: var(--text-primary);
   text-decoration: none;

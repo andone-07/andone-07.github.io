@@ -143,7 +143,7 @@ export const publications: Publication[] = [
     venueTag: "ICML'26",
     venue: "Forty-Third International Conference on Machine Learning",
     year: "2026",
-    image: `${import.meta.env.BASE_URL}dynamic_tmoe.png`,
+    image: `${import.meta.env.BASE_URL}dynamic_tmoe.webp`,
     links: [
       {
         label: "Paper",

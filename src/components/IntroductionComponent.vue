@@ -43,7 +43,7 @@ export default defineComponent({
   width: min(100%, 1080px);
   margin: 0 auto;
   text-align: left;
-  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
   font-size: clamp(1rem, 1.8vh, 1.15rem);
   font-weight: 400;
   line-height: 1.8;

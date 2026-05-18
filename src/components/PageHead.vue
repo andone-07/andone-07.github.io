@@ -137,8 +137,8 @@ export default defineComponent({
 
 .left-section {
   font-size: clamp(1.6rem, 3vh, 2.3rem);
-  font-weight: 550;
-  font-family: "Carattere";
+  font-weight: 400;
+  font-family: "Carattere", "Yaldevi", cursive;
   line-height: 1;
 }
 
@@ -154,7 +154,7 @@ export default defineComponent({
 }
 
 .breadcrumb {
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
   display: flex;
   gap: clamp(0.75rem, 1.5vw, 1.3rem);
   font-size: clamp(0.95rem, 2.1vh, 1.2rem);

@@ -1,7 +1,14 @@
 <template>
   <article class="about-card">
     <div class="avatar">
-      <img src="@/assets/photo.jpg" :alt="profile.avatarAlt" />
+      <img
+        :src="`${baseUrl}photo-avatar.webp`"
+        :alt="profile.avatarAlt"
+        width="640"
+        height="640"
+        decoding="async"
+        fetchpriority="high"
+      />
     </div>
     <div class="info">
       <div class="intro">
@@ -62,6 +69,7 @@ export default defineComponent({
   name: "AboutComponent",
   setup() {
     return {
+      baseUrl: import.meta.env.BASE_URL,
       profile,
     };
   },
@@ -92,6 +100,7 @@ export default defineComponent({
 }
 
 .avatar img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -107,12 +116,13 @@ export default defineComponent({
   flex-wrap: wrap;
   gap: 0.45rem;
   margin-bottom: 0.65rem;
-  font-family: "Yaldevi", "Noto Serif SC", "Songti SC", serif;
+  font-family: "Yaldevi", "Noto Serif SC", "Source Han Serif SC", "Songti SC",
+    serif;
   font-size: clamp(1.35rem, 2.8vh, 1.8rem);
 }
 
 .en {
-  font-family: "Yaldevi";
+  font-family: "Yaldevi", "Inter", sans-serif;
   font-weight: 550;
   color: var(--text-primary);
 }
@@ -120,7 +130,7 @@ export default defineComponent({
 .cn,
 .identity,
 .direction {
-  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
   font-size: clamp(1rem, 2vh, 1.22rem);
   font-weight: 400;
   color: var(--text-primary);
