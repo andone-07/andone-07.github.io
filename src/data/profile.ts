@@ -41,6 +41,7 @@ export interface Publication {
   title: string;
   authors: string[];
   highlightedAuthors: string[];
+  correspondingAuthors: string[];
   venueTag: string;
   venue: string;
   year: string;
@@ -140,6 +141,7 @@ export const publications: Publication[] = [
       "Dynamic TMoE: A Drift-Aware Dynamic Mixture of Experts Framework for Non-Stationary Time Series Forecastin",
     authors: ["Jiawen Zhu", "Shuhan Liu", "Di Weng", "Yingcai Wu"],
     highlightedAuthors: ["Jiawen Zhu"],
+    correspondingAuthors: ["Di Weng"],
     venueTag: "ICML'26",
     venue: "Forty-Third International Conference on Machine Learning",
     year: "2026",
@@ -172,6 +174,7 @@ export const publications: Publication[] = [
       "Yingcai Wu",
     ],
     highlightedAuthors: ["Jiawen Zhu"],
+    correspondingAuthors: ["Di Weng"],
     venueTag: "TVCG",
     venue: "IEEE Transactions on Visualization and Computer Graphics",
     year: "2026",

@@ -28,8 +28,15 @@
               <span
                 :class="{ 'author-myself': isHighlighted(publication, author) }"
               >
-                {{ author }}</span
-              ><span v-if="index < publication.authors.length - 1">, </span>
+                {{ author }}
+                <sup
+                  v-if="isCorrespondingAuthor(publication, author)"
+                  class="corresponding-author-mark"
+                  aria-label="corresponding author"
+                  >*</sup
+                >
+              </span>
+              <span v-if="index < publication.authors.length - 1">, </span>
             </template>
           </p>
           <p class="pub-venue">
@@ -72,10 +79,14 @@ import { publications, type Publication } from "@/data/profile";
 const isHighlighted = (publication: Publication, author: string) =>
   publication.highlightedAuthors.includes(author);
 
+const isCorrespondingAuthor = (publication: Publication, author: string) =>
+  publication.correspondingAuthors.includes(author);
+
 export default defineComponent({
   name: "PublicationComponent",
   setup() {
     return {
+      isCorrespondingAuthor,
       isHighlighted,
       publications,
     };
@@ -157,6 +168,14 @@ export default defineComponent({
   font-family: "Abhaya Libre", Georgia, serif;
   font-weight: 600;
   text-decoration: underline;
+}
+
+.corresponding-author-mark {
+  font-size: 0.75em;
+  line-height: 0;
+  margin-left: 0.05em;
+  position: relative;
+  top: -0.35em;
 }
 
 .pub-venue {
