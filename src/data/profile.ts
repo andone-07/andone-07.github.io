@@ -177,11 +177,11 @@ export const publications: Publication[] = [
     year: "2026",
     image: `${import.meta.env.BASE_URL}watchtower.jpg`,
     links: [
-      { 
+      {
         label: "Paper",
         icon: pdfIcon,
         href: "https://www.researchgate.net/publication/405306489_RuleScope_Semantic-aware_Authoring_of_Data_Validation_Rules?_tp=eyJjb250ZXh0Ijp7InBhZ2UiOiJzY2llbnRpZmljQ29udHJpYnV0aW9ucyIsInByZXZpb3VzUGFnZSI6bnVsbH19",
-      }
+      },
     ],
   },
 ];
