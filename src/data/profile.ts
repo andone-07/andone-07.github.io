@@ -92,7 +92,7 @@ export const profile = {
 
 export const introduction = {
   textBeforeGroup:
-    "Welcome to visit my homepage! Currently, I am a master's student majoring in artificial intelligence at",
+    "Welcome to visit my homepage! Currently, I am a PhD student majoring in artificial intelligence at",
   group: {
     label: "ZJUIDG",
     href: "https://zjuidg.org/",
@@ -157,30 +157,31 @@ export const publications: Publication[] = [
       },
     ],
   },
-  // {
-  //   title: "Watchtower: Semantic-aware Authoring of Data Validation Rules",
-  //   authors: [
-  //     "Zhongsu Luo",
-  //     "Jiawen Zhu",
-  //     "Xinhuan Shu",
-  //     "Shuhan Liu",
-  //     "Xiwen Cai",
-  //     "Ran Chen",
-  //     "Kai Xiong",
-  //     "Jiajun Zhu",
-  //     "Di Weng",
-  //     "Yingcai Wu",
-  //   ],
-  //   highlightedAuthors: ["Jiawen Zhu"],
-  //   venueTag: "VIS'25",
-  //   venue: "IEEE Transactions on Visualization and Computer Graphics",
-  //   year: "2025",
-  //   image: `${import.meta.env.BASE_URL}watchtower.jpg`,
-  //   links: [
-  //     { label: "Paper", icon: pdfIcon },
-  //     { label: "Video", icon: videoIcon },
-  //     { label: "Web", icon: webIcon },
-  //     { label: "Code", icon: githubIcon },
-  //   ],
-  // },
+  {
+    title: "RuleScope: Semantic-aware Authoring of Data Validation Rules.",
+    authors: [
+      "Zhongsu Luo",
+      "Di Weng",
+      "Jiawen Zhu",
+      "Xinhuan Shu",
+      "Shuhan Liu",
+      "Xiwen Cai",
+      "Ran Chen",
+      "Kai Xiong",
+      "Jiajun Zhu",
+      "Yingcai Wu",
+    ],
+    highlightedAuthors: ["Jiawen Zhu"],
+    venueTag: "TVCG",
+    venue: "IEEE Transactions on Visualization and Computer Graphics",
+    year: "2026",
+    image: `${import.meta.env.BASE_URL}watchtower.jpg`,
+    links: [
+      { 
+        label: "Paper",
+        icon: pdfIcon,
+        href: "https://www.researchgate.net/publication/405306489_RuleScope_Semantic-aware_Authoring_of_Data_Validation_Rules?_tp=eyJjb250ZXh0Ijp7InBhZ2UiOiJzY2llbnRpZmljQ29udHJpYnV0aW9ucyIsInByZXZpb3VzUGFnZSI6bnVsbH19",
+      }
+    ],
+  },
 ];
